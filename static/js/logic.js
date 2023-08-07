@@ -7,6 +7,7 @@ var tectonicplatesUrl = "https://raw.githubusercontent.com/fraxen/tectonicplates
 d3.json(queryURL).then(function(data){
     // Once e get a response, send the data.features and data.features object to the createFeatures function.
     createFeatures(data.features);
+    console.log(data.features)
   });
 
   function createFeatures(earthquakeData, platesData){
@@ -103,18 +104,6 @@ legend.onAdd = function() {
    let basemap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
    });
-
- 
-   // Define a baseMaps object to hold our base layers
-   let baseMaps = {
-     "Base-map": basemap
-   };
- 
-   // Create overlay object to hold our overlay layer
-   let overlayMaps = {
-     "Earthquakes": earthquakes,
-     "Tectonic Plates": tectonicPlates
-   };
  
    // Create our map, giving it the streetmap and earthquakes layers to display on load
    let myMap = L.map("map", {
@@ -124,9 +113,6 @@ legend.onAdd = function() {
      zoom: 6,
      layers: [basemap, earthquakes]
    });
-   // Add the layer control to the map
-   L.control.layers(baseMaps, overlayMaps, {
-     collapsed: false
-   }).addTo(myMap);
+
    legend.addTo(myMap);
  }
